@@ -32,7 +32,32 @@ replace each one with the described artwork.
 
 ---
 
-## Option B — True PDF / EPUB via pandoc
+## Option B — Word .docx (no installs)
+
+Also needs **only Python 3** — no extra packages, no internet. Produces a real Word
+document that opens in Microsoft Word, Google Docs, and LibreOffice Writer.
+
+```bash
+make docx
+# or:
+python3 md_to_docx.py ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.md \
+                      ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.docx
+```
+
+What you get:
+- Proper Word heading styles (Heading 1-4) -> usable for an auto Table of Contents
+  (in Word: References -> Table of Contents).
+- Bordered tables, shaded quote blocks, dashed "Designer Visual Spec" boxes.
+- Hard page breaks at every `\newpage`, A5 page size.
+- Tamil text set in **Nirmala UI** (a Tamil-capable font shipped with Windows). On macOS
+  or Linux, if Nirmala UI is absent, the app falls back to another installed Tamil font
+  (e.g. Latha, Noto Sans Tamil). The text itself is Unicode, so it is never lost — only
+  the typeface may differ. To force a specific font, edit the `w:rFonts` line in
+  `md_to_docx.py` (search for `Nirmala UI`).
+
+---
+
+## Option C — True PDF / EPUB via pandoc
 
 Produces a typeset PDF and a reflowable EPUB. Requires a toolchain:
 
@@ -73,7 +98,8 @@ pandoc ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.md \
 | File | Purpose |
 |---|---|
 | `md_to_html.py` | Dependency-free Markdown → styled HTML converter (stdlib only) |
-| `Makefile` | `make html` / `make pdf` / `make epub` / `make clean` |
+| `md_to_docx.py` | Dependency-free Markdown → Word .docx converter (stdlib only) |
+| `Makefile` | `make html` / `make docx` / `make pdf` / `make epub` / `make clean` |
 | `README.md` | This file |
 
 ## Notes for the designer

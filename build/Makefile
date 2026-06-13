@@ -2,6 +2,7 @@
 #
 # Quick start (no tools needed except Python 3):
 #   make html        # -> styled, self-contained HTML (open in a browser, Print -> Save as PDF)
+#   make docx        # -> Microsoft Word .docx (opens in Word, Google Docs, LibreOffice)
 #
 # Full e-book output (requires pandoc + a XeLaTeX engine + Noto Tamil fonts installed):
 #   make pdf         # -> A5 PDF via pandoc + xelatex
@@ -11,18 +12,22 @@
 
 MD     := ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.md
 HTML   := ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.html
+DOCX   := ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.docx
 PDF    := ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.pdf
 EPUB   := ../Kuzhandhaigal-Urimai-Pesa-Thayangugiraargal.epub
 
 MAINFONT  := Noto Serif Tamil
 SANSFONT  := Noto Sans Tamil
 
-.PHONY: all html pdf epub clean
+.PHONY: all html docx pdf epub clean
 
 all: html
 
 html: $(MD)
 	python3 md_to_html.py $(MD) $(HTML)
+
+docx: $(MD)
+	python3 md_to_docx.py $(MD) $(DOCX)
 
 pdf: $(MD)
 	pandoc $(MD) -o $(PDF) \
@@ -43,4 +48,4 @@ epub: $(MD)
 	  --toc --toc-depth=2
 
 clean:
-	rm -f $(HTML) $(PDF) $(EPUB)
+	rm -f $(HTML) $(DOCX) $(PDF) $(EPUB)
